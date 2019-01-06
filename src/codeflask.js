@@ -99,7 +99,7 @@ export default class CodeFlask {
     this.opts.areaId = this.opts.areaId || null
     this.opts.ariaLabelledby = this.opts.ariaLabelledby || null
     this.opts.readonly = this.opts.readonly || null
-	this.opts.startLine = this.opts.startLine || 1
+    this.opts.startLine = this.opts.startLine || 1
 
     // if handleTabs is not either true or false, make it true by default
     if (typeof this.opts.handleTabs !== 'boolean') {
@@ -150,7 +150,7 @@ export default class CodeFlask {
 
   updateLineNumbersCount () {
     let numberList = ''
-	let endLine = this.opts.startLine + this.lineNumber - 1;
+    let endLine = this.opts.startLine + this.lineNumber - 1;
 
     for (let i = this.opts.startLine; i <= endLine; i++) {
       numberList = numberList + `<span class="codeflask__lines__line">${i}</span>`
@@ -373,7 +373,7 @@ export default class CodeFlask {
   }
 
   updateCode (newCode, onUpdate) {
-	if(typeof onUpdate !== 'boolean') onUpdate = true
+    if(typeof onUpdate !== 'boolean') onUpdate = true
     this.code = newCode
     this.elTextarea.value = newCode
     this.elCode.innerHTML = escapeHtml(newCode)

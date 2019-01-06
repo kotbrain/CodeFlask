@@ -11,7 +11,7 @@ export const editorCss = `
     width: 100%;
     height: 100%;
     overflow: hidden;
-	border: 1px solid #d2d2d2;
+    border: 1px solid #d2d2d2;
   }
 
   .codeflask, .codeflask * {
@@ -38,7 +38,7 @@ export const editorCss = `
   }
   
   .codeflask__textarea::selection {
-	background: #e1e1e1;
+    background: #e1e1e1;
   }
 
   .codeflask--has-line-numbers .codeflask__textarea {
