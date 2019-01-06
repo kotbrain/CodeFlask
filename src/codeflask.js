@@ -53,7 +53,6 @@ export default class CodeFlask {
     this.runOptions()
     this.listenTextarea()
     this.populateDefault()
-    this.updateCode(this.code)
   }
 
   createWrapper () {
@@ -373,7 +372,8 @@ export default class CodeFlask {
     return [')', '}', ']', '>'].includes(char) || (['\'', '"'].includes(char) && !hasSelection)
   }
 
-  updateCode (newCode, onUpdate = true) {
+  updateCode (newCode, onUpdate) {
+	if(typeof onUpdate !== 'boolean') onUpdate = true
     this.code = newCode
     this.elTextarea.value = newCode
     this.elCode.innerHTML = escapeHtml(newCode)
@@ -395,7 +395,7 @@ export default class CodeFlask {
   }
 
   populateDefault () {
-    this.updateCode(this.code)
+    this.updateCode(this.code, false)
   }
 
   highlight () {

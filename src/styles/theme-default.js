@@ -10,6 +10,7 @@ export const defaultCssTheme = `
 
 .codeflask .token.punctuation {
   color: #4a4a4a;
+  border: #d2d2d2;
 }
 
 .codeflask .token.keyword {
