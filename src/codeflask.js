@@ -100,6 +100,7 @@ export default class CodeFlask {
     this.opts.areaId = this.opts.areaId || null
     this.opts.ariaLabelledby = this.opts.ariaLabelledby || null
     this.opts.readonly = this.opts.readonly || null
+	this.opts.startLine = this.opts.startLine || 1
 
     // if handleTabs is not either true or false, make it true by default
     if (typeof this.opts.handleTabs !== 'boolean') {
@@ -150,8 +151,9 @@ export default class CodeFlask {
 
   updateLineNumbersCount () {
     let numberList = ''
+	let endLine = this.opts.startLine + this.lineNumber - 1;
 
-    for (let i = 1; i <= this.lineNumber; i++) {
+    for (let i = this.opts.startLine; i <= endLine; i++) {
       numberList = numberList + `<span class="codeflask__lines__line">${i}</span>`
     }
 
@@ -199,7 +201,7 @@ export default class CodeFlask {
       var beforeSelection = inputVal.substr(0, selStartPos)
       var selectionVal = inputVal.substring(selStartPos, selEndPos)
       var afterSelection = inputVal.substring(selEndPos)
-      const indent = ' '.repeat(this.opts.tabSize)
+      const indent = '\t'
 
       if (selStartPos !== selEndPos && selectionVal.length >= indent.length) {
         var currentLineStart = selStartPos - beforeSelection.split('\n').pop().length
@@ -253,7 +255,7 @@ export default class CodeFlask {
 
       var newCode = input.value
       this.updateCode(newCode)
-      this.elTextarea.selectionEnd = selEndPos + this.opts.tabSize
+      this.elTextarea.selectionEnd = selEndPos + indent.length
     }
   }
 
@@ -371,13 +373,13 @@ export default class CodeFlask {
     return [')', '}', ']', '>'].includes(char) || (['\'', '"'].includes(char) && !hasSelection)
   }
 
-  updateCode (newCode) {
+  updateCode (newCode, onUpdate = true) {
     this.code = newCode
     this.elTextarea.value = newCode
     this.elCode.innerHTML = escapeHtml(newCode)
     this.highlight()
     this.setLineNumber()
-    setTimeout(this.runUpdate.bind(this), 1)
+    if(onUpdate) setTimeout(this.runUpdate.bind(this), 1)
   }
 
   updateLanguage (newLanguage) {
